@@ -12,7 +12,7 @@ on:
 
 jobs:
   rustfmt:
-    name: Rustfmt (${{ matrix.toolchain }})
+    name: Rustfmt
     runs-on: ubuntu-20.04
 
     steps:
