@@ -82,6 +82,7 @@ jobs:
         with:
           command: clippy
           args: --workspace --all-targets -- -D warnings
+        if: startsWith(matrix.toolchain, 'stable')
 
       - name: cargo-build (.)
         uses: actions-rs/cargo@v1
