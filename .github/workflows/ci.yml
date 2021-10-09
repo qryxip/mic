@@ -7,7 +7,7 @@ on:
     branches:
       - master
     tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+**'
+      - 'mic**'
   pull_request:
 
 jobs:
@@ -121,10 +121,10 @@ jobs:
           RUST_BACKTRACE: full
         if: matrix.toolchain == 'stable-x86_64-apple-darwin' || matrix.toolchain == 'stable-x86_64-unknown-linux-gnu'
 
-  gh-release:
-    name: GH Release
+  upload-release-notes:
+    name: Upload the release notes
     runs-on: ubuntu-20.04
-    if: startsWith(github.ref, 'refs/tags/')
+    if: ${{ startsWith(github.ref, 'refs/tags/') }}
 
     steps:
       - name: Checkout
@@ -134,13 +134,15 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.9'
+        if: ${{ startsWith(github.ref, 'refs/tags/mic-v') }}
 
       - name: Prepare release notes
         run: |
           from pathlib import Path
+          PATH = Path('./CHANGELOG.md')
           output = ''
-          if Path('./CHANGELOG.md').exists():
-              with open('./CHANGELOG.md') as file:
+          if PATH.exists():
+              with open(PATH) as file:
                   changelog = file.read()
               inside_subsection = False
               for line in changelog.splitlines():
@@ -152,8 +154,33 @@ jobs:
                   elif inside_subsection:
                       break
           with open('./release-notes.md', 'w') as file:
-              file.write(output)
+              file.write(f'{output.strip()}\n')
         shell: python
+        if: ${{ startsWith(github.ref, 'refs/tags/mic-v') }}
+
+      - name: Prepare release notes
+        run: touch ./release-notes.md
+        shell: bash
+        if: ${{ startsWith(github.ref, 'refs/tags/mic_impl-v') }}
+
+      - name: Upload the release notes
+        uses: actions/upload-artifact@v2
+        with:
+          name: release-notes
+          path: release-notes.md
+
+
+  gh-release:
+    name: GH Release
+    runs-on: ubuntu-20.04
+    needs: [rustfmt, build, upload-release-notes]
+
+    steps:
+      - name: Download the release notes
+        uses: actions/download-artifact@v2
+        with:
+          name: release-notes
+          path: .
 
       - name: GH Release
         uses: softprops/action-gh-release@v1
