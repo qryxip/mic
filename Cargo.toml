@@ -1,0 +1,26 @@
+[workspace]
+
+[package]
+name = "mic"
+version = "0.0.0"
+edition = "2018"
+license = "CC0-1.0"
+description = "Facilitates answering to competitive programming problems."
+repository = "https://github.com/qryxip/mic"
+keywords = ["io", "library", "macros", "output"]
+categories = ["command-line-interface", "rust-patterns"]
+publish = false
+
+[package.metadata.cargo-compete.example]
+atcoder-abc188-a = { problem = "https://atcoder.jp/contests/abc188/tasks/abc188_a" }
+
+[dependencies]
+mic_impl = { path = "./mic_impl" }
+
+[dev-dependencies]
+either = "=1.5.3"
+proc-macro2 = "=1.0.9"
+proconio = "0.3.8"
+quote = "=1.0.3"
+syn = "=1.0.17"
+unicode-xid = "=0.2.0"

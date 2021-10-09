@@ -1,0 +1,15 @@
+error[E0618]: expected function, found `__YouCannotRecurseIfTheOutputTypeIsInferred`
+ --> tests/fail/inferred-recursive.rs:6:9
+  |
+6 |         main();
+  |         ^^^^--
+  |         |
+  |         call expression requires function
+
+error[E0618]: expected function, found `__YouCannotRecurseIfTheOutputTypeIsInferred`
+  --> tests/fail/inferred-recursive.rs:14:9
+   |
+14 |         solve();
+   |         ^^^^^--
+   |         |
+   |         call expression requires function

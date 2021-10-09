@@ -1,0 +1,19 @@
+test-suite = "{{ manifest_dir }}/testcases/{{ bin_alias }}.yml"
+
+[template]
+src = '''
+use proconio::input;
+
+fn main() {
+    input! {
+        n: usize,
+    }
+}
+'''
+
+[test]
+profile = "release"
+
+[submit.transpile]
+kind = "command"
+args = ["cargo", "equip", "--exclude-atcoder-crates", "--remove", "docs", "--minify", "libs", "--bin", "{{ bin_name }}"]

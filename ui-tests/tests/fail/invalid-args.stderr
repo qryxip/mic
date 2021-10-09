@@ -1,0 +1,16 @@
+error: expected expression
+ --> tests/fail/invalid-args.rs:3:10
+  |
+3 | #[answer(+)]
+  |          ^
+
+error[E0601]: `main` function not found in crate `$CRATE`
+ --> tests/fail/invalid-args.rs:1:1
+  |
+1 | / use mic::answer;
+2 | |
+3 | | #[answer(+)]
+4 | | fn main() -> _ {
+5 | |     42
+6 | | }
+  | |_^ consider adding a `main` function to `$DIR/tests/fail/invalid-args.rs`
