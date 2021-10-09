@@ -2,14 +2,13 @@
 
 [package]
 name = "mic"
-version = "0.0.0"
+version = "0.1.0"
 edition = "2018"
 license = "CC0-1.0"
 description = "Facilitates answering to competitive programming problems."
 repository = "https://github.com/qryxip/mic"
-keywords = ["io", "library", "macros", "output"]
+keywords = ["competitive", "io", "library", "macros", "output"]
 categories = ["command-line-interface", "rust-patterns"]
-publish = false
 
 [package.metadata.cargo-compete.example]
 atcoder-abc188-a = { problem = "https://atcoder.jp/contests/abc188/tasks/abc188_a" }
