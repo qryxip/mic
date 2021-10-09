@@ -1,13 +1,12 @@
 [package]
 name = "mic_impl"
-version = "0.0.0"
+version = "0.1.0"
 edition = "2018"
 license = "CC0-1.0"
 description = "Implementation for `mic` crate."
 repository = "https://github.com/qryxip/mic"
 keywords = ["internal"]
 categories = []
-publish = false
 
 [lib]
 proc-macro = true
